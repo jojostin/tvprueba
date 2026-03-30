@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TV PRO</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: #0b0f1a;
+    color: #fff;
+}
+
+/* HEADER */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background: #111827;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.logo {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.live {
+    background: red;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+}
+
+/* CONTENEDOR */
+.container {
+    padding: 15px;
+    max-width: 500px;
+    margin: auto;
+}
+
+/* PLAYER */
+.video-container {
+    position: relative;
+    width: 100%;
+    height: 230px;
+    border-radius: 15px;
+    overflow: hidden;
+    margin-bottom: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+}
+
+.video-container iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* BADGE LIVE */
+.badge-live {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: red;
+    padding: 5px 10px;
+    font-size: 12px;
+    border-radius: 20px;
+}
+
+/* TITULO */
+h2 {
+    margin: 10px 0;
+}
+
+/* BOTONES */
+.btn {
+    display: block;
+    text-align: center;
+    padding: 14px;
+    margin-top: 12px;
+    border-radius: 12px;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    background: #1f2937;
+    transition: 0.2s;
+    border: 1px solid rgba(255,255,255,0.05);
+}
+
+.btn:hover {
+    background: #374151;
+}
+
+.btn-main {
+    background: linear-gradient(180deg, #00ff87, #00c853);
+}
+
+.btn-web {
+    background: linear-gradient(180deg, #7b2cff, #4b00ff);
+}
+
+.btn-alt {
+    background: linear-gradient(180deg, #ff7a18, #ff3d00);
+}
+
+.btn-alt2 {
+    background: linear-gradient(180deg, #00c6ff, #0072ff);
+}
+
+/* INFO */
+.info-box {
+    background: rgba(255,255,255,0.05);
+    border-left: 4px solid #00c853;
+    padding: 10px;
+    border-radius: 8px;
+    margin-top: 10px;
+    font-size: 13px;
+    color: #ccc;
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<div class="header">
+    <div class="logo" id="appName">TV PRO</div>
+    <div class="live">● EN VIVO</div>
+</div>
+
+<div class="container">
+
+    <!-- PLAYER -->
+    <div class="video-container">
+        <div class="badge-live">EN VIVO</div>
+        <iframe 
+            id="player"
+            src="https://la14hd.com/vivo/canales.php?stream=ecdf_ligapro&autoplay=1&mute=1"
+            allow="autoplay; fullscreen"
+            allowfullscreen>
+        </iframe>
+    </div>
+
+    <h2>⚽ MUNDIAL 2026</h2>
+
+    <!-- PRINCIPAL -->
+    <a class="btn btn-main" onclick="cambiarWeb('https://la14hd.com/vivo/canales.php?stream=ecdf_ligapro')">
+        SERVIDOR PRINCIPAL
+    </a>
+
+    <!-- WEB -->
+    <a class="btn btn-web" onclick="cambiarWeb('https://la14hd.com/vivo/canales.php?stream=dsports')">
+        SERVIDOR WEB
+    </a>
+
+    <!-- INFO -->
+    <div class="info-box">
+        ⚠️ Los servidores alternos solo se activan cuando hay partidos exclusivos del fútbol ecuatoriano.
+    </div>
+
+    <!-- ALTERNOS -->
+    <a href="https://live20.bozztv.com/giatv/giatv-mienvento2026jostin/mienvento2026jostin/playlist.m3u8" class="btn btn-alt">
+        SERVIDOR ALTERNO 1
+    </a>
+
+    <a href="https://live20.bozztv.com/akamaissh101/ssh101/mienvento2026ca/playlist.m3u8" class="btn btn-alt2">
+        SERVIDOR ALTERNO 2
+    </a>
+
+</div>
+
+<script>
+function cambiarWeb(url) {
+    document.getElementById("player").src = url + "&autoplay=1&mute=1";
+}
+
+// 👇 SOLO CAMBIA ESTE NOMBRE
+const nombreApp = "PAISES BAJOS VS ECUADOR";
+document.getElementById("appName").innerText = nombreApp;
+</script>
+
+</body>
+</html>
