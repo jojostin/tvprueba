@@ -13,7 +13,6 @@ body {
     color: #fff;
 }
 
-/* HEADER */
 .header {
     display: flex;
     justify-content: space-between;
@@ -23,10 +22,7 @@ body {
     border-bottom: 1px solid rgba(255,255,255,0.05);
 }
 
-.logo {
-    font-weight: bold;
-    font-size: 18px;
-}
+.logo { font-weight: bold; font-size: 18px; }
 
 .live {
     background: red;
@@ -35,14 +31,12 @@ body {
     font-size: 12px;
 }
 
-/* CONTENEDOR */
 .container {
     padding: 15px;
     max-width: 500px;
     margin: auto;
 }
 
-/* PLAYER */
 .video-container {
     position: relative;
     width: 100%;
@@ -59,7 +53,6 @@ body {
     border: none;
 }
 
-/* BADGE LIVE */
 .badge-live {
     position: absolute;
     top: 10px;
@@ -70,7 +63,7 @@ body {
     border-radius: 20px;
 }
 
-/* LOADER 🔥 */
+/* LOADER */
 .loader {
     position: absolute;
     top: 0;
@@ -85,13 +78,11 @@ body {
     z-index: 9999;
 }
 
-.hidden {
-    display: none;
-}
+.hidden { display: none; }
 
 .spinner {
-    width: 50px;
-    height: 50px;
+    width: 45px;
+    height: 45px;
     border: 5px solid #fff;
     border-top: 5px solid transparent;
     border-radius: 50%;
@@ -102,12 +93,6 @@ body {
     100% { transform: rotate(360deg); }
 }
 
-/* TITULO */
-h2 {
-    margin: 10px 0;
-}
-
-/* BOTONES */
 .btn {
     display: block;
     text-align: center;
@@ -118,31 +103,11 @@ h2 {
     text-decoration: none;
     font-weight: 600;
     background: #1f2937;
-    transition: 0.2s;
-    border: 1px solid rgba(255,255,255,0.05);
 }
 
-.btn:hover {
-    background: #374151;
-}
+.btn-main { background: linear-gradient(180deg, #00ff87, #00c853); }
+.btn-web { background: linear-gradient(180deg, #7b2cff, #4b00ff); }
 
-.btn-main {
-    background: linear-gradient(180deg, #00ff87, #00c853);
-}
-
-.btn-web {
-    background: linear-gradient(180deg, #7b2cff, #4b00ff);
-}
-
-.btn-alt {
-    background: linear-gradient(180deg, #ff7a18, #ff3d00);
-}
-
-.btn-alt2 {
-    background: linear-gradient(180deg, #00c6ff, #0072ff);
-}
-
-/* INFO */
 .info-box {
     background: rgba(255,255,255,0.05);
     border-left: 4px solid #00c853;
@@ -150,14 +115,12 @@ h2 {
     border-radius: 8px;
     margin-top: 10px;
     font-size: 13px;
-    color: #ccc;
 }
 </style>
 </head>
 
 <body>
 
-<!-- HEADER -->
 <div class="header">
     <div class="logo" id="appName">TV PRO</div>
     <div class="live">● EN VIVO</div>
@@ -165,115 +128,106 @@ h2 {
 
 <div class="container">
 
-    <!-- PLAYER -->
-    <div class="video-container">
-        <div class="badge-live">EN VIVO</div>
+<div class="video-container">
 
-        <!-- LOADER -->
-        <div id="loader" class="loader hidden">
-            <div class="spinner"></div>
-            <p id="loaderText">Cargando...</p>
-        </div>
+    <div class="badge-live">EN VIVO</div>
 
-        <iframe 
-            id="player"
-            src="https://la14hd.com/vivo/canales.php?stream=dsports&autoplay=1&mute=1"
-            allow="autoplay; fullscreen"
-            allowfullscreen>
-        </iframe>
+    <div id="loader" class="loader hidden">
+        <div class="spinner"></div>
+        <p>Cargando...</p>
     </div>
 
-    <h2>⚽ MUNDIAL 2026</h2>
+    <iframe id="player"
+        src="https://la14hd.com/vivo/canales.php?stream=dsports"
+        allowfullscreen>
+    </iframe>
 
-    <!-- PRINCIPAL -->
-    <a class="btn btn-main" onclick="cambiarWeb('https://la14hd.com/vivo/canales.php?stream=dsports')">
-        SERVIDOR PRINCIPAL
-    </a>
+</div>
 
-    <!-- WEB -->
-    <a class="btn btn-web" onclick="cambiarWeb('https://la14hd.com/vivo/canales.php?stream=dsports2')">
-        SERVIDOR WEB
-    </a>
+<h2>⚽ MUNDIAL 2026</h2>
 
-    <!-- INFO -->
-    <div class="info-box">
-        ⚠️ Los servidores alternos solo se activan cuando hay partidos exclusivos del fútbol ecuatoriano.
-    </div>
+<a class="btn btn-main" onclick="cambiar('https://la14hd.com/vivo/canales.php?stream=dsports')">
+SERVIDOR PRINCIPAL
+</a>
 
-    <!-- ALTERNOS -->
-    <a href="https://live20.bozztv.com/giatv/giatv-mienvento2026jostin/mienvento2026jostin/playlist.m3u8" class="btn btn-alt">
-        SERVIDOR ALTERNO 1
-    </a>
+<a class="btn btn-web" onclick="cambiar('https://teleamazonas-live.cdn.vustreams.com/live/b545dc57-91af-4f6b-bac7-8d9337166407/live.isml/b545dc57-91af-4f6b-bac7-8d9337166407.m3u8')">
+SERVIDOR WEB
+</a>
 
-    <a href="https://live20.bozztv.com/akamaissh101/ssh101/mienvento2026ca/playlist.m3u8" class="btn btn-alt2">
-        SERVIDOR ALTERNO 2
-    </a>
+<div class="info-box">
+⚠️ Sistema con bloqueo de anuncios activado
+</div>
 
 </div>
 
 <script>
 const player = document.getElementById("player");
+const loader = document.getElementById("loader");
 
-let retryCount = 0;
-const maxRetries = 5;
+/* =========================
+   🚀 ADBLOCK SIMULADO
+========================= */
 
-/* LOADER */
-function showLoader(text = "Cargando...") {
-    document.getElementById("loaderText").innerText = text;
-    document.getElementById("loader").classList.remove("hidden");
+/* 1. BLOQUEO DE POPUPS */
+window.open = function(url) {
+    console.log("🚫 Popup bloqueado:", url);
+    return null;
+};
+
+/* 2. BLOQUEO DE LINKS SOSPECHOSOS */
+document.addEventListener("click", function(e) {
+    let a = e.target.closest("a");
+    if (!a) return;
+
+    let url = a.href || "";
+
+    let blocked = [
+        "doubleclick",
+        "ads",
+        "adservice",
+        "pop",
+        "click",
+        "banner"
+    ];
+
+    for (let word of blocked) {
+        if (url.includes(word)) {
+            e.preventDefault();
+            alert("🚫 Anuncio bloqueado");
+            return false;
+        }
+    }
+});
+
+/* =========================
+   PLAYER CONTROL
+========================= */
+
+function showLoader() {
+    loader.classList.remove("hidden");
 }
 
 function hideLoader() {
-    document.getElementById("loader").classList.add("hidden");
+    loader.classList.add("hidden");
 }
 
-/* 🔥 LOADER PRO */
-window.addEventListener("load", () => {
-    showLoader("Cargando canal...");
+function cambiar(url) {
+    showLoader();
+
+    player.src = "about:blank";
 
     setTimeout(() => {
-        hideLoader();
-    }, 5000);
-});
-
-/* 👆 Quitar loader si toca el video */
-player.addEventListener("click", () => {
-    hideLoader();
-});
-
-/* CAMBIO DE SERVIDOR */
-function cambiarWeb(url) {
-    retryCount = 0;
-    showLoader("Cargando canal...");
-    player.src = url + "&autoplay=1&mute=1";
-}
-
-/* AUTO-RECONEXIÓN 🔥 */
-player.onload = () => {
-    hideLoader();
-    retryCount = 0;
-};
-
-player.onerror = () => {
-    intentarReconectar();
-};
-
-function intentarReconectar() {
-    if (retryCount < maxRetries) {
-        retryCount++;
-        showLoader("Reconectando... (" + retryCount + ")");
+        player.src = url;
 
         setTimeout(() => {
-            player.src = player.src;
-        }, 3000);
-    } else {
-        showLoader("Error al cargar ❌");
-    }
+            hideLoader();
+        }, 5000);
+
+    }, 500);
 }
 
-// 👇 SOLO CAMBIA ESTE NOMBRE
-const nombreApp = "IRAK VS BOLIVIA";
-document.getElementById("appName").innerText = nombreApp;
+/* nombre app */
+document.getElementById("appName").innerText = "IRAK VS BOLIVIA PRO";
 </script>
 
 </body>
